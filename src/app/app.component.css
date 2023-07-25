@@ -117,17 +117,18 @@
   justify-content: center;
   align-items: center;
 
-  &>span {
-    color: var(--white);
-    font-size: 0.8em;
-    display: none;
-  }
+}
 
-  &>img {
-    width: fit-content;
-    height: 2em;
-    max-width: 2rem;
-  }
+.info-block-label span {
+  color: var(--white);
+  font-size: 0.8em;
+  display: none;
+}
+
+.info-block-label img {
+  width: fit-content;
+  height: 2em;
+  max-width: 2rem;
 }
 
 
