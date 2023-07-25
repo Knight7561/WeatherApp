@@ -1,59 +1,235 @@
-<div class="container">
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <div class="input-field">
+      <input
+      type="text"
+      placeholder="Search City"
+      name="city"
+      [(ngModel)]="cityName"
+    />
+    </div>
+    <mat-button-toggle-group class="tempMetric" [(ngModel)]="tempMetric" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="C">ºC</mat-button-toggle>
+      <mat-button-toggle value="F">ºF</mat-button-toggle>
+    </mat-button-toggle-group>
+  </form>
+</div>
+
+<div *ngIf="fetchedData" class="container">
   <div class="upper-data">
-    <img src="../assets/hot.jpg" alt="High temperature" *ngIf="14 < 15">
-    <img src="../assets/cold.png" alt="Low temperature" *ngIf="17 > 15">
+    <img
+      src="../assets/hot.jpg"
+      alt="High temperature"
+      *ngIf="getFToC(fetchedData.main.temp) > getFToC(thresholdTemperature)"
+    />
+    <img
+      src="../assets/cold.png"
+      alt="Low temperature"
+      *ngIf="getFToC(fetchedData.main.temp) <= getFToC(thresholdTemperature)"
+    />
     <div class="weather-data">
-      <div class="location">Wellington</div>
-      <div class="temperature">{{14.4 | number: '1.0-0'}} ºC</div>
+      <div class="location">{{ fetchedData.name }}</div>
+      <div class="temperature">
+        {{ getFToC(fetchedData.main.temp) | number : "1.0-0" }} º{{tempMetric}}
+      </div>
     </div>
   </div>
   <div class="lower-data">
-    <div class="more-info-label">
-      More Information
-    </div>
+    <div class="more-info-label">More Information</div>
     <div class="more-info-container">
-
+      <div class="info-box-full">
+        <span>Feels like : {{getFToC(fetchedData.main.feels_like)  | number : "1.0-0" }} º{{tempMetric}}</span>
+      </div>
       <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/min-temp.png" alt="Min"/>
-          <span>min</span>
+        <div class="info-block-title">
+          <span>Min temperature</span>
         </div>
-        <div class="info-block-value">
-          10ºC
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/min-temp.png" alt="Min" />
+            <span>min</span>
+          </div>
+          <div class="info-block-value">
+            {{ getFToC(fetchedData.main.temp_min) | number : "1.0-0" }} º{{tempMetric}}
+          </div>
         </div>
       </div>
 
       <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/temp.png" alt="Max"/>
-          <span>max</span>
+        <div class="info-block-title">
+          <span>Max temperature</span>
         </div>
-        <div class="info-block-value">
-          10ºC
-        </div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/humidity.png" alt="humidity"/>
-          <span>humidity</span>
-        </div>
-        <div class="info-block-value">
-          77%
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/temp.png" alt="Max" />
+            <span>max</span>
+          </div>
+          <div class="info-block-value">
+            {{ getFToC(fetchedData.main.temp_max) | number : "1.0-0" }} º{{tempMetric}}
+          </div>
         </div>
       </div>
 
       <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/wind.png" alt="wind"/>
-          <span>wind</span>
+        <div class="info-block-title">
+          <span>Humidity</span>
         </div>
-        <div class="info-block-value">
-          15 mph
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/humidity.png" alt="humidity" />
+            <span>humidity</span>
+          </div>
+          <div class="info-block-value">
+            {{ getFToC(fetchedData.main.humidity) | number : "1.0-0" }} %
+          </div>
         </div>
       </div>
 
+      <div class="info-block">
+        <div class="info-block-title">
+          <span>Wind</span>
+        </div>
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/wind.png" alt="wind" />
+            <span>wind</span>
+          </div>
+          <div class="info-block-value">
+            {{ fetchedData.wind.speed | number : "1.0-0" }} mph
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title">
+          <span>Pressure</span>
+        </div>
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/barometer.png" alt="pressure" />
+            <span>pressure</span>
+          </div>
+          <div class="info-block-value">
+            {{ fetchedData.main.pressure | number : "1.0-0" }} mb
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title">
+          <span>Visibility</span>
+        </div>
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/visibility.png" alt="visibility" />
+            <span>visibility</span>
+          </div>
+          <div class="info-block-value">
+            {{ fetchedData.visibility*0.00062137| number : "1.0-0" }} mi
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- <div class="container">
+  <div class="upper-data">
+    <img src="../assets/hot.jpg" alt="High temperature" *ngIf="14 < 15" />
+    <img src="../assets/cold.png" alt="Low temperature" *ngIf="17 > 15" />
+    <div class="weather-data">
+      <div class="location">Wellington</div>
+      <div class="temperature">{{ 14.4 | number : "1.0-0" }} ºC</div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">More Information</div>
+    <div class="more-info-container">
+      <div class="info-box-full">
+        <span>Feels like : 30*C</span>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">
+          <span>Min temperature</span>
+        </div>
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/min-temp.png" alt="Min" />
+            <span>min</span>
+          </div>
+          <div class="info-block-value">10ºC</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title">
+          <span>Max temperature</span>
+        </div>
+        <div class="info-block-content">
+          <div class="info-block-label">
+            <img src="../assets/temp.png" alt="Max" />
+            <span>Max</span>
+          </div>
+          <div class="info-block-value">10ºC</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/temp.png" alt="Max" />
+          <span>max</span>
+        </div>
+        <div class="info-block-value">10ºC</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/humidity.png" alt="humidity" />
+          <span>humidity</span>
+        </div>
+        <div class="info-block-value">77%</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png" alt="wind" />
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">15 mph</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png" alt="wind" />
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">15 mph</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png" alt="wind" />
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">15 mph</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png" alt="wind" />
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">15 mph</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png" alt="wind" />
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">15 mph</div>
+      </div>
+    </div>
+  </div>
+</div> -->
 <router-outlet></router-outlet>

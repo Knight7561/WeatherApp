@@ -6,7 +6,6 @@
   box-shadow: 10px 10px 10px var(--shadow-dark);
 }
 
-
 .upper-data {
   position: relative;
   overflow: hidden;
@@ -14,8 +13,6 @@
   height: 50%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-
-
 }
 
 .upper-data img {
@@ -65,15 +62,48 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 11px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+
+}
+.more-info-container::-webkit-scrollbar {
+  display: none;
+}
+
+.info-box-full {
+  width: 100%;
+  border: rgba(255, 255, 255, 0.845) 3px double;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  text-align: center;
+  font-size: medium;
+  color: aliceblue;
+}
+
+.info-block {
+  width: 10rem;
+  display: inline-block;
+  border: 2px double rgb(166, 225, 225);
+  border-radius: 20px;
+  height: 6rem;
 
 }
 
-
-.info-block {
-  width: 50%;
+.info-block-title {
+    margin: 0px;
+    border-bottom: 3px dotted rgb(180, 212, 212);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    font-size: small;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+.info-block-content {
   display: flex;
   flex-direction: row;
-
 }
 
 .info-block-label {
@@ -82,18 +112,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  & > span {
+    color: var(--white);
+    font-size: 0.8em;
+    display: none;
+  }
+  & > img {
+    width: fit-content;
+    height: 2em;
+    max-width: 2rem;
+  }
 }
 
-.info-block-label img {
-  width: 1.5em;
-  height: 2em;
-
-}
-
-.info-block-label span {
-  color: var(--white);
-  font-size: 0.8em;
-}
 
 .info-block-value {
   width: 50%;
@@ -101,6 +132,7 @@
   justify-content: flex-start;
   align-items: center;
   color: var(--white);
+  font-size: 1.2em;
 }
 
 
@@ -115,4 +147,29 @@
   padding: 1em;
   display: flex;
   flex-direction: column;
+}
+
+
+.search {
+  text-align: center;
+}
+
+.search input {
+  background-color: var(--shadow-light);
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 1em;
+  color: var(--grey-1);
+  font-size: 0.8em;
+  text-align: center;
+}
+
+mat-button-toggle-group{
+  margin-left: 20rem;
+  margin-top: 1rem;
+  background-color: #ffffff;
+}
+.mat-button-toggle-checked {
+  background-color: aqua;
 }
