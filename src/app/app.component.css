@@ -39,6 +39,8 @@
   color: var(--white);
   text-align: center;
   font-size: 1.25em;
+  margin: 20px;
+  margin-bottom: 2rem;
 }
 
 .temperature {
@@ -68,6 +70,7 @@
   justify-content: center;
 
 }
+
 .more-info-container::-webkit-scrollbar {
   display: none;
 }
@@ -92,15 +95,16 @@
 }
 
 .info-block-title {
-    margin: 0px;
-    border-bottom: 3px dotted rgb(180, 212, 212);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    text-align: center;
-    font-size: small;
-    margin-bottom: 10px;
-    color: #ffffff;
+  margin: 0px;
+  border-bottom: 3px dotted rgb(180, 212, 212);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+  font-size: small;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
+
 .info-block-content {
   display: flex;
   flex-direction: row;
@@ -113,12 +117,13 @@
   justify-content: center;
   align-items: center;
 
-  & > span {
+  &>span {
     color: var(--white);
     font-size: 0.8em;
     display: none;
   }
-  & > img {
+
+  &>img {
     width: fit-content;
     height: 2em;
     max-width: 2rem;
@@ -165,11 +170,12 @@
   text-align: center;
 }
 
-mat-button-toggle-group{
+mat-button-toggle-group {
   margin-left: 20rem;
   margin-top: 1rem;
   background-color: #ffffff;
 }
+
 .mat-button-toggle-checked {
   background-color: aqua;
 }
